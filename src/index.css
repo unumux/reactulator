@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.calc {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.calc__panel-container {
+  outline-style: none;
+}
+
+.calc__panel--2, .calc__panel--3 {
+  display: none;
+}
