@@ -7,7 +7,6 @@ export default class Graph extends React.Component {
         super(props);
     }
 
-
     render() {
         const chartData = {
                 labels: ["Monthly Income when healthy", "Monthly Income with disability", "Expenses"],
@@ -21,43 +20,3 @@ export default class Graph extends React.Component {
         )
     }
 };
-
-
-// const Graph = ({data}) => {
-
-//     const chartData = {
-//         labels: ["Monthly Income when healthy", "Monthly Income with disability", "Expenses"],
-//         datasets: [{
-//             data: [this.props.data.value01, this.props.data.value02, this.props.value03],
-//             fillColor: ["#2bb6d9", "#8dbf48", "#f2c849"]
-//         }]
-//     }
-
-//     return (
-//         <Bar data={ chartData } width="500" height="500"/>
-//     )
-// }
-
-// const Graph = ({props}) => {
-//         const chartData = {
-//             labels: ["Monthly Income when healthy", "Monthly Income with disability", "Expenses"],
-//                 datasets: [{
-//                     data: [this.props.data.value01, this.props.data.value02, this.props.data.value03],
-//                     fillColor: ["#2bb6d9", "#8dbf48", "#f2c849"]
-//                 }]
-//             }
-//         };
-//         return (
-//             <Bar data={ chartData } width="500" height="500"/>
-//         )
-// };
-
-//     const chartData = {
-//         labels: ["Monthly Income when healthy", "Monthly Income with disability", "Expenses"],
-//             datasets: [{
-//                 data: [this.props.data.value01, this.props.data.value02, this.props.data.value03],
-//                 fillColor: ["#2bb6d9", "#8dbf48", "#f2c849"]
-//             }]
-//     }
-// const Graph = ({data}) =>
-//     <Bar data={chartData} width="500" height="500"/>

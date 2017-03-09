@@ -15,7 +15,6 @@ export default class Main extends React.Component {
         this.setState({words: document.querySelector('input').value});
     }
 
-
     render() {
         return (
             <div>
@@ -23,7 +22,6 @@ export default class Main extends React.Component {
                 <p>Find out what amount of coverage is right for you</p>
                 <h2>To start, we need some information from you</h2>
                 <ul role="navigation">
-                    {/*<li><Link to="/cats">Previous</Link></li>*/}
                     <li><Link to="/expenses">Next</Link></li>
                 </ul>
                 <label htmlFor="input-01">Words: </label>
