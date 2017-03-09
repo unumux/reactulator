@@ -18,7 +18,7 @@ export default class Main extends React.Component {
     render() {
         return (
             <div>
-                <h1>Dsiability Calculator</h1>
+                <h1>Disability Calculator</h1>
                 <p>Find out what amount of coverage is right for you</p>
                 <h2>To start, we need some information from you</h2>
                 <ul role="navigation">
