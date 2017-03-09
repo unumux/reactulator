@@ -1,35 +1,63 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import { Bar } from 'react-chartjs';
-// import './Expenses';
+import App from './App';
 
 export default class Graph extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            chartData: {
-                labels: ["Monthly Income when healthy", "Monthly Income with disability", "Expenses"],
-                datasets: [{
-                    data: [100, 80, 20],
-                    fillColor: ["#2bb6d9", "#8dbf48", "#f2c849"]
-                }]
-            },
-            options: {
-                scales: {
-                    // yAxes: [{
-                    //     stacked: true
-                    // }],
-                    // xAxes: [{
-                    //     stacked: true
-                    // }]
-                }
-            }
-        };
     }
 
+
     render() {
+        const chartData = {
+                labels: ["Monthly Income when healthy", "Monthly Income with disability", "Expenses"],
+                datasets: [{
+                    data: [this.props.data.value01, this.props.data.value02, this.props.data.value03],
+                    fillColor: ["#2bb6d9", "#8dbf48", "#f2c849"]
+                }]
+            };
         return (
-            <Bar data={ this.state.chartData } options={ this.state.options } width="500" height="500"/>
+            <Bar data={ chartData } width="500" height="500"/>
         )
     }
 };
+
+
+// const Graph = ({data}) => {
+
+//     const chartData = {
+//         labels: ["Monthly Income when healthy", "Monthly Income with disability", "Expenses"],
+//         datasets: [{
+//             data: [this.props.data.value01, this.props.data.value02, this.props.value03],
+//             fillColor: ["#2bb6d9", "#8dbf48", "#f2c849"]
+//         }]
+//     }
+
+//     return (
+//         <Bar data={ chartData } width="500" height="500"/>
+//     )
+// }
+
+// const Graph = ({props}) => {
+//         const chartData = {
+//             labels: ["Monthly Income when healthy", "Monthly Income with disability", "Expenses"],
+//                 datasets: [{
+//                     data: [this.props.data.value01, this.props.data.value02, this.props.data.value03],
+//                     fillColor: ["#2bb6d9", "#8dbf48", "#f2c849"]
+//                 }]
+//             }
+//         };
+//         return (
+//             <Bar data={ chartData } width="500" height="500"/>
+//         )
+// };
+
+//     const chartData = {
+//         labels: ["Monthly Income when healthy", "Monthly Income with disability", "Expenses"],
+//             datasets: [{
+//                 data: [this.props.data.value01, this.props.data.value02, this.props.data.value03],
+//                 fillColor: ["#2bb6d9", "#8dbf48", "#f2c849"]
+//             }]
+//     }
+// const Graph = ({data}) =>
+//     <Bar data={chartData} width="500" height="500"/>
