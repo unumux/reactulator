@@ -22,7 +22,13 @@ export default class App extends React.Component {
                 number02: 0,
                 number03: 0,
                 number04: 0,
-                number05: 0
+                number05: 0,
+                number06: 0,
+                number07: 0,
+                number08: 0,
+                number09: 0,
+                number12: 0,
+                number13: 0
             }
         };
         // binding here improves performance by binding only once, as opposed to every time the function called
@@ -55,16 +61,21 @@ export default class App extends React.Component {
     displayNumber(e) {
         const {name, value} = e.target;
         const newNumbers = Object.assign({}, this.state.values, {[name]: value});
-        // this.setState({ values: newNumbers });
+        this.setState({ values: newNumbers });
     }
 
     render() {
         return (
             <div>
-                <div>{this.state.values.number01}</div>
                 <Router history={ hashHistory }>
-                <Route path="/" component={ Main } onBlur={this.displayNumber} data={this.state.values}/>
-                <Route path="/expenses" component={ Expenses } data={this.state.data} onBlur={this.inputUpdate}/>
+                <Route path="/" component={() => (
+                    <Main values={this.state.values} onBlur={this.displayNumber}/>
+                )}/>
+                <Route path="/expenses" component={() => (
+                    <Expenses values={this.state.values} onBlur={this.displayNumber}/>
+                )}/>
+
+                {/*<Route path="/expenses" component={ Expenses } data={this.state.data} onBlur={this.inputUpdate}/>*/}
                 <Route path="/results" component={ Results }/>
                 </Router>
                 <Graph data={ this.state.data }/>
