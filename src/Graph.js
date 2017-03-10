@@ -1,6 +1,5 @@
 import React from 'react';
 import { Bar } from 'react-chartjs';
-import App from './App';
 
 export default class Graph extends React.Component {
     constructor(props) {

@@ -15,11 +15,20 @@ export default class App extends React.Component {
                 value01: 0,
                 value02: 0,
                 value03: 0
+            },
+
+            values: {
+                number01: 0,
+                number02: 0,
+                number03: 0,
+                number04: 0,
+                number05: 0
             }
         };
         // binding here improves performance by binding only once, as opposed to every time the function called
         this.inputUpdate = this.inputUpdate.bind(this);
         this.inputDisplay = this.inputDisplay.bind(this);
+        this.displayNumber = this.displayNumber.bind(this);
     }
 
     inputUpdate(e) {
@@ -29,11 +38,11 @@ export default class App extends React.Component {
         console.log(e.target, name, value);
 
         // creating a new object with the input data, and updates all three bars
-        // const newData = Object.assign({}, this.state.data, { [name]: value});
+        const newData = Object.assign({}, this.state.data, {[name]: value});
 
         // updates one key/value pair
         // input02 needs to be the sum of multiple inputs, how do I do that?? 
-        const newData = Object.assign({}, this.state.data, {value02: value});
+        // const newData = Object.assign({}, this.state.data, {value02: value});
 
         // assigning that new object to the state
         this.setState({ data: newData });
@@ -43,11 +52,18 @@ export default class App extends React.Component {
         console.log("it works!");
     }
 
+    displayNumber(e) {
+        const {name, value} = e.target;
+        const newNumbers = Object.assign({}, this.state.values, {[name]: value});
+        // this.setState({ values: newNumbers });
+    }
+
     render() {
         return (
             <div>
+                <div>{this.state.values.number01}</div>
                 <Router history={ hashHistory }>
-                <Route path="/" component={ Main }/>
+                <Route path="/" component={ Main } onBlur={this.displayNumber} data={this.state.values}/>
                 <Route path="/expenses" component={ Expenses } data={this.state.data} onBlur={this.inputUpdate}/>
                 <Route path="/results" component={ Results }/>
                 </Router>

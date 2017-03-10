@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
-import App from './App';
 
 const Expenses = ({route}) => {
     // passing props through the router
-    const {onBlur, data} = route;
+    const {onBlur} = route;
     return (
         <div>
             <h1>Disability Calculator</h1>
