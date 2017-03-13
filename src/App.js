@@ -44,10 +44,17 @@ export default class App extends React.Component {
         this.inputUpdate = this.inputUpdate.bind(this);
         this.inputDisplay = this.inputDisplay.bind(this);
         this.displayNumber = this.displayNumber.bind(this);
+        this.updateValues = this.updateValues.bind(this);
+    }
+
+    updateValues(e) {
+        const {name, value} = e.target;
+        this.setState({[name]: value});
+        console.log(value);
+        console.log(this.state);
     }
 
     inputUpdate(e) {
-        // need to reset the input somehow so values dont add up
         this.setState({ name: 0 });
         const {name, value} = e.target;
         console.log(e.target, name, value);
@@ -78,7 +85,7 @@ export default class App extends React.Component {
             <div>
                 <Router history={ hashHistory }>
                 <Route path="/" component={() => (
-                    <Main values={this.state.values} onBlur={this.displayNumber}/>
+                    <Main values={this.state.values} onBlur={this.displayNumber} onChange={this.updateValues}/>
                 )}/>
                 <Route path="/expenses" component={() => (
                     <Expenses values={this.state.values} onBlur={this.displayNumber}/>

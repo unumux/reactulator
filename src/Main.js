@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 // first page of calculator
 
-const Main = ({onBlur, values}) => {
+const Main = ({onBlur, values, onChange}) => {
 
     return (
         <div>
@@ -13,12 +13,12 @@ const Main = ({onBlur, values}) => {
             <h2>To start, we need some information from you</h2>
             <div>
                 <label htmlFor="input01">How old are you?*</label>
-                <input type="number" name="age" id="input01" onBlur={onBlur}/>
+                <input type="number" name="age" id="input01" onBlur={onBlur} onChange={onChange}/>
                 <p>{values.age}</p>
             </div>
             <div>
                 <label htmlFor="input02">What is your annual salary?*</label>
-                <input type="number" name="annualSalary" id="input02" onBlur={onBlur}/>
+                <input type="number" name="annualSalary" id="input02" onBlur={onBlur} onChange={onChange}/>
                 <p>{values.annualSalary}</p>
             </div>
             <div>
