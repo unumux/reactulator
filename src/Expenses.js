@@ -10,43 +10,43 @@ const Expenses = ({onBlur, values}) => {
             <h2>What are your monthly expenses?</h2>
             <div>
                 <label htmlFor="input06">Rent / Mortgage*</label>
-                <input type="text" name="number06" id="input06" onBlur={onBlur}/>
-                <div>{values.number06}</div>
+                <input type="number" name="mortgage" id="input06" onBlur={onBlur}/>
+                <div>{values.mortgage}</div>
             </div>
             <div>
                 <label htmlFor="input07">Transportation</label>
-                <input type="text" name="number07" id="input07" onBlur={onBlur}/>
-                <div>{values.number07}</div>
+                <input type="number" name="transportation" id="input07" onBlur={onBlur}/>
+                <div>{values.transportation}</div>
             </div>
             <div>
                 <label htmlFor="input08">Food*</label>
-                <input type="text" name="number08" id="input08" onBlur={onBlur}/>
-                <div>{values.number08}</div>
+                <input type="number" name="food" id="input08" onBlur={onBlur}/>
+                <div>{values.food}</div>
             </div>
             <div>
                 <label htmlFor="input09">Utilities</label>
-                <input type="text" name="number09" id="input09" onBlur={onBlur}/>
-                <div>{values.number09}</div>
+                <input type="number" name="utilities" id="input09" onBlur={onBlur}/>
+                <div>{values.utilities}</div>
             </div>
             <div>
                 <label htmlFor="input10">Credit Cards</label>
-                <input type="text" name="number10" id="input10" onBlur={onBlur}/>
-                <div>{values.number10}</div>
+                <input type="number" name="creditCards" id="input10" onBlur={onBlur}/>
+                <div>{values.creditCards}</div>
             </div>
             <div>
                 <label htmlFor="input11">Child / Elder Care*</label>
-                <input type="text" name="number11" id="input11" onBlur={onBlur}/>
-                <div>{values.number11}</div>
+                <input type="number" name="childElderCare" id="input11" onBlur={onBlur}/>
+                <div>{values.childElderCare}</div>
             </div>
             <div>
                 <label htmlFor="input12">Education*</label>
-                <input type="text" name="number12" id="input12" onBlur={onBlur}/>
-                <div>{values.number12}</div>
+                <input type="number" name="education" id="input12" onBlur={onBlur}/>
+                <div>{values.education}</div>
             </div>
             <div>
                 <label htmlFor="input13">Other Major Expenses*</label>
-                <input type="text" name="number13" id="input13" onBlur={onBlur}/>
-                <div>{values.number13}</div>
+                <input type="number" name="otherExpenses" id="input13" onBlur={onBlur}/>
+                <div>{values.otherExpenses}</div>
             </div>
             <div>Total Monthly Expenses:</div>
             <input type="text" name="value01" onBlur={onBlur}/>

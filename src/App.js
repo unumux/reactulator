@@ -18,17 +18,26 @@ export default class App extends React.Component {
             },
 
             values: {
-                number01: 0,
-                number02: 0,
-                number03: 0,
-                number04: 0,
-                number05: 0,
-                number06: 0,
-                number07: 0,
-                number08: 0,
-                number09: 0,
-                number12: 0,
-                number13: 0
+                age: 0, // how old are you
+                annualSalary: 0, // what is your annual salary
+                monthlyIncome: 0, // what is your monthly income after taxes
+                additionalIncome: 0, // estimated monthly income if disabled
+                currentCoveragePercent: 0, // current disability coverage percentage of annual salary
+                incomeWithDisability: 0, // current coverage plus additional income
+                currentCoverage: 0, // calculated from annual salary and current coverage percentage
+                mortgage: 0,
+                transportation: 0,
+                food: 0,
+                utilities: 0,
+                creditCards: 0,
+                childElderCare: 0,
+                education: 0,
+                otherExpenses: 0,
+                totalExpenses: 0, // total monthly expenses
+                unprotectedExpenses: 0, // totalexpenses minus incomeWithDisability
+                protectedExpenses: 0, // expenses minus incomeWithDisability
+                withUnumCoverage: 0, // with unum coverage, you get an additional..
+                calculatedPremium: 0 // this coverage should cost you around...
             }
         };
         // binding here improves performance by binding only once, as opposed to every time the function called
@@ -74,8 +83,6 @@ export default class App extends React.Component {
                 <Route path="/expenses" component={() => (
                     <Expenses values={this.state.values} onBlur={this.displayNumber}/>
                 )}/>
-
-                {/*<Route path="/expenses" component={ Expenses } data={this.state.data} onBlur={this.inputUpdate}/>*/}
                 <Route path="/results" component={ Results }/>
                 </Router>
                 <Graph data={ this.state.data }/>

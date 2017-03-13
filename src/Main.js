@@ -13,28 +13,28 @@ const Main = ({onBlur, values}) => {
             <h2>To start, we need some information from you</h2>
             <div>
                 <label htmlFor="input01">How old are you?*</label>
-                <input type="text" name="number01" id="input01" onBlur={onBlur}/>
-                <p>{values.number01}</p>
+                <input type="number" name="age" id="input01" onBlur={onBlur}/>
+                <p>{values.age}</p>
             </div>
             <div>
                 <label htmlFor="input02">What is your annual salary?*</label>
-                <input type="text" name="number02" id="input02" onBlur={onBlur}/>
-                <p>{values.number02}</p>
+                <input type="number" name="annualSalary" id="input02" onBlur={onBlur}/>
+                <p>{values.annualSalary}</p>
             </div>
             <div>
                 <label htmlFor="input03">What is your montly income after taxes?*</label>
-                <input type="text" name="number03" id="input03" onBlur={onBlur}/>
-                <p>{values.number03}</p>
+                <input type="number" name="monthlyIncome" id="input03" onBlur={onBlur}/>
+                <p>{values.monthlyIncome}</p>
             </div>
             <div>
                 <label htmlFor="input04">Estimated monthly income if disabled?*</label>
-                <input type="text" name="number04" id="input04" onBlur={onBlur}/>
-                <p>{values.number04}</p>
+                <input type="number" name="additionalIncome" id="input04" onBlur={onBlur}/>
+                <p>{values.additionalIncome}</p>
             </div>
             <div>
                 <label htmlFor="input05">Current disability coverage?*</label>
-                <input type="text" name="number05" id="input05" onBlur={onBlur}/>
-                <p>{values.number05}</p>
+                <input type="number" name="currentCoverage" id="input05" onBlur={onBlur}/>
+                <p>{values.currentCoverage}</p>
             </div>
             <ul role="navigation">
                 <p>Step 1 of 3</p> <li><Link to="/expenses">Next</Link></li>
