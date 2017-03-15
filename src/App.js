@@ -61,7 +61,7 @@ export default class App extends React.Component {
                     <Results unprotected={10} additionalCoverage={20} calculatedPremium={11}/>
                 )}/>
                 </Router>
-                <Graph data={ this.state.values }/>
+                <Graph monthlyIncome={ 3000 } additionalIncome={ 300 } currentCoverage={ 1200 } unumCoverage={ 500 } totalExpenses={ 5000 }/>
             </div>
         )
     }
