@@ -42,11 +42,33 @@ export default class App extends React.Component {
 
     updateState(e) {
         const {name, value} = e.target;
-        const newNumbers = Object.assign({}, this.state.values, {[name]: value});
+        const newNumbers = Object.assign({}, this.state.values, {[name]: parseInt(value)});
         this.setState({ values: newNumbers });
     }
 
     render() {
+        let {
+            annualSalary,
+            additionalIncome,
+            currentCoveragePercent,
+            unprotectedExpenses,
+            mortgage,
+            transportation,
+            food,
+            utilities,
+            creditCards,
+            childElderCare,
+            education,
+            otherExpenses
+        } = this.state.values;
+
+        let totalExpenses = mortgage + transportation + food + utilities + creditCards + childElderCare + education + otherExpenses;
+
+        // let currentCoverage = (annualSalary * currentCoveragePercent.toFixed(2)) / 12;
+        let currentCoverage = (annualSalary * currentCoveragePercent.toFixed(2)) / 12;
+
+        let incomeWithDisability = currentCoverage + additionalIncome;
+
         // calculated variables go here
         return (
             <div>
@@ -58,10 +80,10 @@ export default class App extends React.Component {
                     <Expenses onBlur={this.updateState}/>
                 )}/>
                 <Route path="/results" component={() => (
-                    <Results unprotected={10} additionalCoverage={20} calculatedPremium={11}/>
+                    <Results unprotected={ 10 } additionalCoverage={ 20 } calculatedPremium={ 11 }/>
                 )}/>
                 </Router>
-                <Graph monthlyIncome={ 3000 } additionalIncome={ 300 } currentCoverage={ 1200 } unumCoverage={ 500 } totalExpenses={ 5000 }/>
+                <Graph monthlyIncome={ this.state.values.monthlyIncome } additionalIncome={ additionalIncome } currentCoverage={ currentCoverage } unumCoverage={ 0 } totalExpenses={ totalExpenses }/>
             </div>
         )
     }
