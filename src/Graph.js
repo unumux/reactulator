@@ -3,15 +3,21 @@ import { Bar } from 'react-chartjs-2';
 
 const chartData = {
     labels: ["Monthly Income when healthy", "Monthly Income with disability", "Expenses"],
+    series: ["one", "two", "three"],
     datasets: [{
         backgroundColor: ["#2bb6d9", "#8dbf48", "#f2c849"],
+        // label: ["", "hey"],
+        // series: ["series one"]
     },
     {
         backgroundColor: ["#0b96b9", "#6d9f28", "#E48E43"],
+        // series: ["two"]
     },
     {
-        backgroundColor: ["transparent", "#004276", "#f8a346"]
-    }]
+        backgroundColor: ["transparent", "#004276", "#f8a346"],
+        // series: ["three"]
+    }],
+    // series: ["One", "Two", "three"]
 };
 
 const chartOptions = {
