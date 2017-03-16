@@ -10,7 +10,7 @@ const chartData = {
         backgroundColor: ["#0b96b9", "#6d9f28", "#E48E43"],
     },
     {
-        backgroundColor: ["transparent", "#4d7f08", "transparent"]
+        backgroundColor: ["transparent", "#004276", "#f8a346"]
     }]
 };
 
@@ -25,7 +25,7 @@ const chartOptions = {
     }
 };
 
-const Graph = ({monthlyIncome, additionalIncome, currentCoverage, unumCoverage, totalExpenses}) => {
+const Graph = ({monthlyIncome, additionalIncome, currentCoveragePercent, currentCoverage, unumCoverage, totalExpenses, unprotectedExpenses}) => {
     const layer1 = [];
     const layer2 = [];
     const layer3 = [];
@@ -40,8 +40,8 @@ const Graph = ({monthlyIncome, additionalIncome, currentCoverage, unumCoverage, 
     chartData.datasets[0].data[1] = additionalIncome; 
     chartData.datasets[1].data[1] = currentCoverage;
     chartData.datasets[2].data[1] = unumCoverage;
-    chartData.datasets[0].data[2] = totalExpenses;
-    // chartData.datasets[1].data[2] = unprotected;
+    chartData.datasets[0].data[2] = totalExpenses - unprotectedExpenses; // graph needs tooltips to reflect correct labels!!!!
+    chartData.datasets[1].data[2] = unprotectedExpenses;
 
     // chartData.datasets[0].label = "Hello";
 

@@ -15,20 +15,20 @@ export default class App extends React.Component {
         this.state = {
             values: {
                 age: 0, // how old are you
-                annualSalary: 0, // what is your annual salary
-                monthlyIncome: 0, // what is your monthly income after taxes
-                additionalIncome: 0, // estimated monthly income if disabled
-                currentCoveragePercent: 0, // current disability coverage percentage of annual salary
+                annualSalary: 12000, // what is your annual salary
+                monthlyIncome: 1000, // what is your monthly income after taxes
+                additionalIncome: 100, // estimated monthly income if disabled
+                currentCoveragePercent: 50, // current disability coverage percentage of annual salary
                 // incomeWithDisability: 0, // current coverage plus additional income
                 // currentCoverage: 0, // calculated from annual salary and current coverage percentage
-                mortgage: 0,
-                transportation: 0,
-                food: 0,
-                utilities: 0,
-                creditCards: 0,
-                childElderCare: 0,
-                education: 0,
-                otherExpenses: 0,
+                mortgage: 100,
+                transportation: 100,
+                food: 100,
+                utilities: 100,
+                creditCards: 100,
+                childElderCare: 100,
+                education: 100,
+                otherExpenses: 100,
                 // totalExpenses: 0, // total monthly expenses
                 // unprotectedExpenses: 0, // totalexpenses minus incomeWithDisability
                 // protectedExpenses: 0, // expenses minus incomeWithDisability
@@ -50,8 +50,8 @@ export default class App extends React.Component {
         let {
             annualSalary,
             additionalIncome,
+            monthlyIncome,
             currentCoveragePercent,
-            unprotectedExpenses,
             mortgage,
             transportation,
             food,
@@ -64,26 +64,29 @@ export default class App extends React.Component {
 
         let totalExpenses = mortgage + transportation + food + utilities + creditCards + childElderCare + education + otherExpenses;
 
-        // let currentCoverage = (annualSalary * currentCoveragePercent.toFixed(2)) / 12;
-        let currentCoverage = (annualSalary * currentCoveragePercent.toFixed(2)) / 12;
+        let currentCoverage = (annualSalary * (currentCoveragePercent / 100)) / 12;
 
         let incomeWithDisability = currentCoverage + additionalIncome;
+
+        let unumCoverage = 0;
+
+        let unprotectedExpenses = Math.max(totalExpenses - incomeWithDisability, 0);
 
         // calculated variables go here
         return (
             <div>
                 <Router history={ hashHistory }>
                 <Route path="/" component={() => (
-                    <Main onBlur={this.updateState}/>
+                    <Main onBlur={this.updateState} values={this.state.values}/>
                 )}/>
                 <Route path="/expenses" component={() => (
-                    <Expenses onBlur={this.updateState}/>
+                    <Expenses onBlur={this.updateState} values={this.state.values}/>
                 )}/>
                 <Route path="/results" component={() => (
                     <Results unprotected={ 10 } additionalCoverage={ 20 } calculatedPremium={ 11 }/>
                 )}/>
                 </Router>
-                <Graph monthlyIncome={ this.state.values.monthlyIncome } additionalIncome={ additionalIncome } currentCoverage={ currentCoverage } unumCoverage={ 0 } totalExpenses={ totalExpenses }/>
+                <Graph monthlyIncome={ monthlyIncome } additionalIncome={ additionalIncome } currentCoverage={ currentCoverage } unumCoverage={ unumCoverage } totalExpenses={ totalExpenses } unprotectedExpenses={ unprotectedExpenses }/>
             </div>
         )
     }
