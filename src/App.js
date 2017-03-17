@@ -1,6 +1,5 @@
 import React from "react";
 import { Router, Route, hashHistory } from 'react-router';
-// import Perf from 'react-addons-perf';
 
 // functions that get used in graph and expenses can live here
 
@@ -14,7 +13,7 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             values: {
-                age: 0, // how old are you
+                age: 38, // how old are you
                 annualSalary: 12000, // what is your annual salary
                 monthlyIncome: 1000, // what is your monthly income after taxes
                 additionalIncome: 100, // estimated monthly income if disabled
@@ -33,6 +32,8 @@ export default class App extends React.Component {
         };
         // binding here improves performance by binding only once, as opposed to every time the function called
         this.updateState = this.updateState.bind(this);
+        this.checkAnnualSalary = this.checkAnnualSalary.bind(this);
+        this.checkMonthlyIncome = this.checkMonthlyIncome.bind(this);
     }
 
     updateState(e) {
@@ -40,6 +41,23 @@ export default class App extends React.Component {
         const newNumbers = Object.assign({}, this.state.values, {[name]: parseInt(value)});
         this.setState({ values: newNumbers });
     }
+
+    checkAnnualSalary(e) {
+        const annualSalary = e.target.value;
+        const alert = document.querySelector('.alert');
+        if(annualSalary > 218181.82) {
+            alert.dataset.visible = "true";
+        }
+    }
+
+    checkMonthlyIncome(e) {
+        const monthlyIncome = e.target.value;
+        const alert = document.querySelector('.alert--monthly');
+        if(monthlyIncome > 18181.82) {
+            alert.dataset.visible = "true";
+        }
+    }
+    // this isnt being used yet, either need to combine the two functions or figure out how to pass two onChange events to router
 
     render() {
         let {
@@ -78,7 +96,7 @@ export default class App extends React.Component {
             ltdRate = 0.47;
         }
         if(age >= 50 && age <= 54) {
-            ltdRate=0.57;
+            ltdRate = 0.57;
         }
         if(age >= 55 && age <= 59) {
             ltdRate = 0.70;
@@ -100,24 +118,28 @@ export default class App extends React.Component {
 
         let incomeWithDisability = currentCoverage + additionalIncome;
 
-        let annualPremium = (annualSalary / 100) * ltdRate;
+        let annualPremium = Math.round((annualSalary / 100) * ltdRate);
 
-        let monthlyRate = annualPremium / 12;
+        let monthlyRate = Math.round(annualPremium / 12);
 
         let unprotectedExpenses = Math.max(totalExpenses - incomeWithDisability, 0);
+
+        console.log(Math.round(annualPremium), Math.round(monthlyRate)); // it works!
+
+
 
         // calculated variables go here
         return (
             <div>
                 <Router history={ hashHistory }>
                 <Route path="/" component={() => (
-                    <Main onBlur={this.updateState} values={this.state.values}/>
+                    <Main onBlur={this.updateState} values={this.state.values} onChange={this.checkAnnualSalary}/>
                 )}/>
                 <Route path="/expenses" component={() => (
                     <Expenses onBlur={this.updateState} values={this.state.values}/>
                 )}/>
                 <Route path="/results" component={() => (
-                    <Results unprotected={ 10 } additionalCoverage={ 20 } calculatedPremium={ 11 }/>
+                    <Results unprotectedExpenses={ unprotectedExpenses } additionalCoverage={ 20 } monthlyRate={ monthlyRate }/>
                 )}/>
                 </Router>
                 <Graph monthlyIncome={ monthlyIncome } additionalIncome={ additionalIncome } currentCoverage={ currentCoverage } unumCoverage={ 10 } totalExpenses={ totalExpenses } unprotectedExpenses={ unprotectedExpenses }/>
