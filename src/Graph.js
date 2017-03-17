@@ -3,21 +3,15 @@ import { Bar } from 'react-chartjs-2';
 
 const chartData = {
     labels: ["Monthly Income when healthy", "Monthly Income with disability", "Expenses"],
-    series: ["one", "two", "three"],
     datasets: [{
         backgroundColor: ["#2bb6d9", "#8dbf48", "#f2c849"],
-        // label: ["", "hey"],
-        // series: ["series one"]
     },
     {
         backgroundColor: ["#0b96b9", "#6d9f28", "#E48E43"],
-        // series: ["two"]
     },
     {
         backgroundColor: ["transparent", "#004276", "#f8a346"],
-        // series: ["three"]
     }],
-    // series: ["One", "Two", "three"]
 };
 
 const chartOptions = {
@@ -28,7 +22,11 @@ const chartOptions = {
         yAxes: [{
             stacked: true
         }]
+    },
+    legend: {
+        display: false,
     }
+
 };
 
 const Graph = ({monthlyIncome, additionalIncome, currentCoveragePercent, currentCoverage, unumCoverage, totalExpenses, unprotectedExpenses}) => {
@@ -52,7 +50,9 @@ const Graph = ({monthlyIncome, additionalIncome, currentCoveragePercent, current
     // chartData.datasets[0].label = "Hello";
 
     return (
-        <Bar data={ chartData } options={ chartOptions } width={500} height={500}/>
+        <div className="graph-container">
+            <Bar data={ chartData } options={ chartOptions } width={400} height={400}/>
+        </div>
     );
 };
 

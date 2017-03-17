@@ -19,8 +19,6 @@ export default class App extends React.Component {
                 monthlyIncome: 1000, // what is your monthly income after taxes
                 additionalIncome: 100, // estimated monthly income if disabled
                 currentCoveragePercent: 50, // current disability coverage percentage of annual salary
-                // incomeWithDisability: 0, // current coverage plus additional income
-                // currentCoverage: 0, // calculated from annual salary and current coverage percentage
                 mortgage: 100,
                 transportation: 100,
                 food: 100,
@@ -29,9 +27,6 @@ export default class App extends React.Component {
                 childElderCare: 100,
                 education: 100,
                 otherExpenses: 100,
-                // totalExpenses: 0, // total monthly expenses
-                // unprotectedExpenses: 0, // totalexpenses minus incomeWithDisability
-                // protectedExpenses: 0, // expenses minus incomeWithDisability
                 // withUnumCoverage: 0, // with unum coverage, you get an additional..
                 // calculatedPremium: 0 // this coverage should cost you around...
             }
@@ -48,6 +43,7 @@ export default class App extends React.Component {
 
     render() {
         let {
+            age,
             annualSalary,
             additionalIncome,
             monthlyIncome,
@@ -62,13 +58,51 @@ export default class App extends React.Component {
             otherExpenses
         } = this.state.values;
 
+        let ltdRate = 0;
+        if(age < 25) {
+            ltdRate = 0.8;
+        }
+        if(age >= 25 && age <= 29) {
+            ltdRate = 0.10;
+        }
+        if(age >= 30 && age <= 34) {
+            ltdRate = 0.14;
+        }
+        if(age >=35 && age <= 39) {
+            ltdRate = 0.17;
+        }
+        if(age >= 40 && age <= 44) {
+            ltdRate = 0.35;
+        }
+        if(age >= 45 && age <= 49) {
+            ltdRate = 0.47;
+        }
+        if(age >= 50 && age <= 54) {
+            ltdRate=0.57;
+        }
+        if(age >= 55 && age <= 59) {
+            ltdRate = 0.70;
+        }
+        if(age >= 60 && age <= 64) {
+            ltdRate = 0.67;
+        }
+        if(age >= 65 && age <= 69) {
+            ltdRate = 0.38;
+        }
+        if(age >= 70) {
+            ltdRate = 0.22;
+        }
+
+
         let totalExpenses = mortgage + transportation + food + utilities + creditCards + childElderCare + education + otherExpenses;
 
         let currentCoverage = (annualSalary * (currentCoveragePercent / 100)) / 12;
 
         let incomeWithDisability = currentCoverage + additionalIncome;
 
-        let unumCoverage = 0;
+        let annualPremium = (annualSalary / 100) * ltdRate;
+
+        let monthlyRate = annualPremium / 12;
 
         let unprotectedExpenses = Math.max(totalExpenses - incomeWithDisability, 0);
 
@@ -86,7 +120,7 @@ export default class App extends React.Component {
                     <Results unprotected={ 10 } additionalCoverage={ 20 } calculatedPremium={ 11 }/>
                 )}/>
                 </Router>
-                <Graph monthlyIncome={ monthlyIncome } additionalIncome={ additionalIncome } currentCoverage={ currentCoverage } unumCoverage={ unumCoverage } totalExpenses={ totalExpenses } unprotectedExpenses={ unprotectedExpenses }/>
+                <Graph monthlyIncome={ monthlyIncome } additionalIncome={ additionalIncome } currentCoverage={ currentCoverage } unumCoverage={ 10 } totalExpenses={ totalExpenses } unprotectedExpenses={ unprotectedExpenses }/>
             </div>
         )
     }
