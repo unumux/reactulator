@@ -14,7 +14,7 @@ export default class App extends React.Component {
         this.state = {
             values: {
                 age: 38, // how old are you
-                annualSalary: 12000, // what is your annual salary
+                annualSalary: 30000, // what is your annual salary
                 monthlyIncome: 1000, // what is your monthly income after taxes
                 additionalIncome: 100, // estimated monthly income if disabled
                 currentCoveragePercent: 50, // current disability coverage percentage of annual salary
@@ -111,6 +111,11 @@ export default class App extends React.Component {
             ltdRate = 0.22;
         }
 
+        // these numbers may change
+        const ltdBenefitPercent = .55;
+        const ltdMonthlyMax = 10000;
+        const payPeriod = 12;
+        const rateModal = 12; 
 
         let totalExpenses = mortgage + transportation + food + utilities + creditCards + childElderCare + education + otherExpenses;
 
@@ -118,13 +123,19 @@ export default class App extends React.Component {
 
         let incomeWithDisability = currentCoverage + additionalIncome;
 
-        let annualPremium = Math.round((annualSalary / 100) * ltdRate);
+        let annualPremium = (annualSalary / 100) * ltdRate; // was rounding also here, removed for accuracy
 
-        let monthlyRate = Math.round(annualPremium / 12);
+        let monthlyRate = Math.round(annualPremium / 12); 
 
         let unprotectedExpenses = Math.max(totalExpenses - incomeWithDisability, 0);
 
-        console.log(Math.round(annualPremium), Math.round(monthlyRate)); // it works!
+        console.log("annual premium:", annualPremium, "monthly rate:", monthlyRate);
+
+        let ltdBenefit = Math.min(annualSalary / 12 * ltdBenefitPercent, ltdMonthlyMax);
+        console.log("ltdBenefit", ltdBenefit);
+
+        let ltdCost = Math.min(annualSalary/rateModal, ltdMonthlyMax/ltdBenefitPercent) / 100 * ltdRate * rateModal / payPeriod;
+        console.log("ltdCost", ltdCost);
 
 
 
@@ -139,7 +150,7 @@ export default class App extends React.Component {
                     <Expenses onBlur={this.updateState} values={this.state.values}/>
                 )}/>
                 <Route path="/results" component={() => (
-                    <Results unprotectedExpenses={ unprotectedExpenses } additionalCoverage={ 20 } monthlyRate={ monthlyRate }/>
+                    <Results unprotectedExpenses={ unprotectedExpenses } ltdBenefit={ ltdBenefit } monthlyRate={ monthlyRate } ltdCost={ltdCost}/>
                 )}/>
                 </Router>
                 <Graph monthlyIncome={ monthlyIncome } additionalIncome={ additionalIncome } currentCoverage={ currentCoverage } unumCoverage={ 10 } totalExpenses={ totalExpenses } unprotectedExpenses={ unprotectedExpenses }/>
